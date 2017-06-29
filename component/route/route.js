@@ -1,5 +1,5 @@
 const Joi = require('joi');
-
+var product = require("../controller/product")
 var route = [
 	{
 		method: 'GET',
@@ -11,6 +11,16 @@ var route = [
 			handler: function(req,reply){
 				return reply({status:400,"message":"failed"});
 			},
+		}
+	},
+	{
+		method: 'GET',
+		path:'/searchNearBy', 		
+		config: {
+			description: 'search nearby',
+			notes: 'search nearby',
+			tags: ['api'],
+			handler: product.searchNearBy,
 		}
 	}
 ];
