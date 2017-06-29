@@ -27,6 +27,22 @@ var route = [
 				}
 			}
 		}
+	},
+	{
+		method: 'POST',
+		path:'/flipkart', 		
+		config: {
+			description: 'search flipkart',
+			notes: 'search flipkart',
+			tags: ['api'],
+			handler: product.flipkart,
+			validate: {
+				payload: {
+					product: Joi.string().required(),
+					limit: Joi.number().required()
+				}
+			}
+		}
 	}
 ];
 
