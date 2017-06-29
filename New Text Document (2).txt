@@ -1,6 +1,0 @@
-set shl = createobject("wscript.shell")
-shl.run "notepad", 9
-wscript.sleep 500
-shl.sendkeys "Auto Typer{enter}"
-wscript.sleep 2000
-shl.sendkeys "Your words here"

@@ -14,13 +14,18 @@ var route = [
 		}
 	},
 	{
-		method: 'GET',
+		method: 'POST',
 		path:'/searchNearBy', 		
 		config: {
 			description: 'search nearby',
 			notes: 'search nearby',
 			tags: ['api'],
 			handler: product.searchNearBy,
+			validate: {
+				payload: {
+					product: Joi.string().required()
+				}
+			}
 		}
 	}
 ];
