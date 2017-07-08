@@ -43,7 +43,110 @@ var route = [
 				}
 			}
 		}
-	}
+	},
+	{
+		method: 'POST',
+		path:'/product/save', 		
+		config: {
+			description: 'save product',
+			notes: 'save product',
+			tags: ['api'],
+			handler: product.saveToadmin,
+			validate: {
+				payload: {
+					productId: Joi.string().required(),
+					productName: Joi.string().required(),
+					productUrl: Joi.string().required(),
+					productCount: Joi.number().required(),
+					orderBy: Joi.string().required(),
+					orderFor: Joi.string().required(),
+					Location: Joi.string().required()
+				}
+			}
+		}
+	},
+	{
+		method: 'GET',
+		path:'/product/get', 		
+		config: {
+			description: 'Get product',
+			notes: 'Get product',
+			tags: ['api'],
+			handler: product.getToadmin,
+			validate: {
+				
+			}
+		}
+	},
+	{
+		method: 'GET',
+		path:'/engineer-location/get', 		
+		config: {
+			description: 'Get engineer-location',
+			notes: 'Get engineer-location',
+			tags: ['api'],
+			handler: product.engineerLocationGet,
+			validate: {
+				query:{
+					id:Joi.string().optional(),
+					deviceId: Joi.string().optional()
+				}
+			}
+		}
+	},
+	{
+		method: 'GET',
+		path:'/job/list/{userId}', 		
+		config: {
+			description: 'Get engineer-job-list',
+			notes: 'Get engineer-job-list',
+			tags: ['api'],
+			handler: product.jobsList,
+			validate: {
+				params:{
+					userId:Joi.string().required()
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		path:'/job/save', 		
+		config: {
+			description: 'Get engineer-job-save',
+			notes: 'Get engineer-job-save',
+			tags: ['api'],
+			handler: product.jobSave,
+			validate: {
+				payload:{
+					userId:Joi.string().required(),
+					Location: Joi.string().required(),
+					Address: Joi.string().required(),
+					customerName: Joi.string().required(),
+					customerContactNo: Joi.string().required(),
+					jobOn: Joi.string().required(),
+					reason: Joi.string().required()
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		path:'/engineer-location/save', 		
+		config: {
+			description: 'save engineer-location',
+			notes: 'save engineer-location',
+			tags: ['api'],
+			handler: product.engineerLocationSet,
+			validate: {
+				payload: {
+					id: Joi.string().required(),
+					location: Joi.string().required(),
+					name: Joi.string().required()
+				}
+			}
+		}
+	},
 ];
 
 module.exports = route;
