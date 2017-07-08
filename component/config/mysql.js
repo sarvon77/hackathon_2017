@@ -14,7 +14,7 @@ mysqlQuery.connect = function(cb) {
 			console.log("connected mysql")
 			cb();
 		} else {
-			console.log("connected not mysql",error)
+			console.log("connected not mysql",err)
 		}
 	});
 	
