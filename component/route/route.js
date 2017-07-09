@@ -173,7 +173,10 @@ var route = [
 			validate: {
 				payload: {
 					status: Joi.string().required(),
-					id: Joi.string().required()
+					id: Joi.string().required(),
+					"userId":Joi.string().required(),
+					"rating":Joi.string().required(),
+					"feedback":Joi.string().required()
 				}
 			}
 		}

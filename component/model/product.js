@@ -90,7 +90,7 @@ productModel.engineerLocationGet = function(req,cb) {
 productModel.jobsList = function(req,cb) {	
 	
 	//console.log(typeof req.params.userId);
-	var getQuery = "select * from jobs where userId = '" + req.params.userId +"'";
+	var getQuery = "select * from jobs where userId = '" + req.params.userId +"' and status = 'I' ";
 	mysql.query(getQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
@@ -166,13 +166,26 @@ productModel.getWeather = function(req,cb) {
 	});
 }
 productModel.jobCompleted = function(req,cb) {
-	var updateQuery = "UPDATE jobs SET status = '"+req.payload.status+"' where id ='" + req.payload.id +"'";
+	var updateQuery = "UPDATE jobs SET status = '"+req.payload.status+"',rating= '"+req.payload.rating+"',feedback= '"+req.payload.feedback+"' where id ='" + req.payload.id +"'";
 	mysql.query(updateQuery,function(err,succ) {
 		if(err) {
-			//console.log("in",insertOrUpdateQuery)
 			cb(true,"failed");
 			
 		} else {
+			var selectQuery = "SELECT FLOOR(SUM(`rating`) / COUNT(*)) AS rating FROM `jobs` WHERE `userId` ='"+ req.payload.userId +"'";
+			console.log(selectQuery)
+			mysql.query(selectQuery,function(err,succ) {
+				if(!err){
+					var updateQuery = "UPDATE `engineer_location` SET `rating` = '" + succ[0].rating + "' WHERE `id` = '"+ req.payload.userId +"'";
+					console.log(updateQuery);
+					mysql.query(updateQuery,function(err,succ) {
+						if(err) {
+							
+						}
+					});
+				}
+			})
+			
 			cb(null,"success");
 		}
 	});
