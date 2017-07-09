@@ -87,10 +87,14 @@ productModel.engineerLocationGet = function(req,cb) {
 		}
 	});
 }
-productModel.jobsList = function(req,cb) {	
-	
-	//console.log(typeof req.params.userId);
-	var getQuery = "select * from jobs where userId = '" + req.params.userId +"'";
+productModel.jobsList = function(req,cb,isfn) {		
+	var parmasData = "";
+	if(isfn) {
+		parmasData = req;
+	} else {
+		parmasData = req.params.userId;
+	}
+	var getQuery = "select * from jobs where userId = '" + parmasData +"'";
 	mysql.query(getQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
@@ -166,6 +170,7 @@ productModel.getWeather = function(req,cb) {
 	});
 }
 productModel.jobCompleted = function(req,cb) {
+	var _this = this;
 	var updateQuery = "UPDATE jobs SET status = '"+req.payload.status+"',rating= '"+req.payload.rating+"',feedback= '"+req.payload.feedback+"' where id ='" + req.payload.id +"'";
 	mysql.query(updateQuery,function(err,succ) {
 		if(err) {
@@ -185,8 +190,13 @@ productModel.jobCompleted = function(req,cb) {
 					});
 				}
 			})
-			
-			cb(null,"success");
+			_this.jobsList(req.payload.userId,function(err,data){
+				if(err){
+					cb(true,"failed");
+				} else {					
+					cb(null,data);
+				}
+			},true);
 		}
 	});
 }
