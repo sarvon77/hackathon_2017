@@ -90,7 +90,7 @@ productModel.engineerLocationGet = function(req,cb) {
 productModel.jobsList = function(req,cb) {	
 	
 	//console.log(typeof req.params.userId);
-	var getQuery = "select * from jobs where userId = '" + req.params.userId +"' and status = 'I' ";
+	var getQuery = "select * from jobs where userId = '" + req.params.userId +"'";
 	mysql.query(getQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
