@@ -2,16 +2,17 @@ var mysql  = require('mysql');
 var mysqlQuery = {};
 var _this = this;
 
-mysqlQuery.connect = function(cb) {
+mysqlQuery.connect = function(cb,no) {
 	_this.connection = mysql.createConnection({
 	  host     : 'sarvon77.heliohost.org',
-	  user     : 'sarvon77_admin',
+	  user     : no == 1?'sarvon77_admin':no == 2?"sarvon77_vignesh":"sarvon77_ragav",
 	  password : 'admin',
 	  database : 'sarvon77_hackathon'
 	});	 
 	_this.connection.connect(function(err){
 		if(!err) {
-			console.log("connected mysql")
+			console.log("connected mysql");
+			//console.log(arguments)
 			cb();
 		} else {
 			console.log("connected not mysql",err)
@@ -20,7 +21,7 @@ mysqlQuery.connect = function(cb) {
 	
 }
 
-mysqlQuery.query = function (query,cb) {
+mysqlQuery.query = function (query,cb,no) {
 	this.connect(function() {
 		_this.connection.query(query, function (error, results, fields) {
 			_this.connection.end(function(err){
@@ -34,7 +35,7 @@ mysqlQuery.query = function (query,cb) {
 				cb(true,error)
 			}
 		});
-	})	
+	},no)	
 }
 
 module.exports = mysqlQuery;

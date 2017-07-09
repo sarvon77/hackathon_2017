@@ -52,7 +52,7 @@ productModel.saveToadmin = function(req,cb) {
 		} else {
 			cb(null,succ);
 		}
-	});
+	},1);
 }
 
 productModel.getToadmin = function(req,cb) {
@@ -63,7 +63,7 @@ productModel.getToadmin = function(req,cb) {
 		} else {
 			cb(null,succ);
 		}
-	});
+	},2);
 }
 productModel.engineerLocationGet = function(req,cb) {
 	var queryData = req.query,
@@ -85,7 +85,7 @@ productModel.engineerLocationGet = function(req,cb) {
 		} else {
 			cb(null,succ);
 		}
-	});
+	},3);
 }
 productModel.jobsList = function(req,cb,isfn) {		
 	var parmasData = "";
@@ -101,7 +101,7 @@ productModel.jobsList = function(req,cb,isfn) {
 		} else {
 			cb(null,succ);
 		}
-	});
+	},1);
 }
 productModel.jobSave = function(req,cb) {
 	var data = req.payload;
@@ -120,7 +120,7 @@ productModel.jobSave = function(req,cb) {
 		} else {
 			cb(null,succ);
 		}
-	});
+	},2);
 }
 productModel.engineerLocationSet = function(req,cb) {
 	var data = req.payload;
@@ -149,9 +149,9 @@ productModel.engineerLocationSet = function(req,cb) {
 				} else {
 					cb(null,{userId:(succ.insertId + 1)});
 				}
-			});
+			},1);
 		}
-	});
+	},3);
 }
 productModel.getWeather = function(req,cb) {
 	
@@ -189,7 +189,7 @@ productModel.jobCompleted = function(req,cb) {
 						}
 					});
 				}
-			})
+			},3)
 			_this.jobsList(req.payload.userId,function(err,data){
 				if(err){
 					cb(true,"failed");
@@ -198,6 +198,6 @@ productModel.jobCompleted = function(req,cb) {
 				}
 			},true);
 		}
-	});
+	},2);
 }
 module.exports = productModel;
