@@ -165,4 +165,16 @@ productModel.getWeather = function(req,cb) {
 		}
 	});
 }
+productModel.jobCompleted = function(req,cb) {
+	var updateQuery = "UPDATE jobs SET status = '"+req.payload.status+"' where id ='" + req.payload.id +"'";
+	mysql.query(updateQuery,function(err,succ) {
+		if(err) {
+			//console.log("in",insertOrUpdateQuery)
+			cb(true,"failed");
+			
+		} else {
+			cb(null,"success");
+		}
+	});
+}
 module.exports = productModel;

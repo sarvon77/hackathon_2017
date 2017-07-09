@@ -162,6 +162,21 @@ var route = [
 				}
 			}
 		}
+	},{
+		method: 'POST',
+		path:'/job/completed', 		
+		config: {
+			description: 'Job status',
+			notes: 'Job status',
+			tags: ['api'],
+			handler: product.jobCompleted,
+			validate: {
+				payload: {
+					status: Joi.string().required(),
+					id: Joi.string().required()
+				}
+			}
+		}
 	},
 ];
 
