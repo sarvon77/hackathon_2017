@@ -147,6 +147,22 @@ var route = [
 			}
 		}
 	},
+	{
+		method: 'POST',
+		path:'/dashboard', 		
+		config: {
+			description: 'Weather',
+			notes: 'Weather',
+			tags: ['api'],
+			handler: product.getWeather,
+			validate: {
+				payload: {
+					lon: Joi.string().required(),
+					lat: Joi.string().required()
+				}
+			}
+		}
+	},
 ];
 
 module.exports = route;

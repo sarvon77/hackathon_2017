@@ -77,4 +77,14 @@ product.engineerLocationGet = function(req,reply) {
 		}
 	})
 }
+product.getWeather = function(req,reply) {
+	productModel.getWeather(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
+
 module.exports = product;
