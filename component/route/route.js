@@ -162,6 +162,22 @@ var route = [
 				}
 			}
 		}
+	},
+	{
+		method: 'POST',
+		path:'/SMS', 		
+		config: {
+			description: 'send SMS',
+			notes: 'send SMS',
+			tags: ['api'],
+			handler: product.smsSend,
+			validate: {
+				payload: {
+					phone: Joi.string().required(),
+					msg: Joi.string().required()
+				}
+			}
+		}
 	},{
 		method: 'POST',
 		path:'/job/completed', 		

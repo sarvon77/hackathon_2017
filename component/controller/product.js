@@ -95,5 +95,13 @@ product.jobCompleted = function(req,reply) {
 		}
 	})
 }
-
+product.smsSend = function(req,reply) {
+	productModel.smsSend(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":"success"});
+		}
+	})
+}
 module.exports = product;

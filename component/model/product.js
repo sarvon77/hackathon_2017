@@ -200,4 +200,20 @@ productModel.jobCompleted = function(req,cb) {
 		}
 	},2);
 }
+productModel.smsSend = function(req,cb) {
+	var options = {
+	  url: "https://sarvon-cts.000webhostapp.com/sendsms.php?uid=8903639221&pwd=A2258Q&phone="+req.payload.phone+"&msg="+req.payload.msg
+	};
+ 
+	request(options, function(error, response, body){
+		if (!error && response.statusCode == 200) {
+			var info = JSON.parse(body);
+			cb(null,"success");
+		} else {
+			cb(true);
+		}
+	});
+}
+
+
 module.exports = productModel;
