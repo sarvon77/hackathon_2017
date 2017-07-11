@@ -226,14 +226,14 @@ productModel.youtubeSearch = function(req,cb) {
 		if (!error && response.statusCode == 200) {
 			var info = JSON.parse(body);
 			var responseData = [];			
-			_.each(info.data.items,function(videoDetails) {
+			/*_.each(info.data.items,function(videoDetails) {
 				responseData.push({
 					"videoId":videoDetails.id.videoDetails,
 					"title":videoDetails.snippet.title,
 					"desc":videoDetails.snippet.description
 				})
-			})
-			cb(null,responseData);
+			})*/
+			cb(null,info);
 		} else {
 			cb(true);
 		}
