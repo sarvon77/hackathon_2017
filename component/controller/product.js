@@ -104,4 +104,14 @@ product.smsSend = function(req,reply) {
 		}
 	})
 }
+
+product.getforAdmin = function(req,reply) {
+	productModel.getforAdmin(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
 module.exports = product;

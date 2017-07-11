@@ -197,6 +197,20 @@ var route = [
 			}
 		}
 	},
+
+	{
+		method: 'GET',
+		path:'/product/admin', 		
+		config: {
+			description: 'Get product admin',
+			notes: 'Get product admin',
+			tags: ['api'],
+			handler: product.getforAdmin,
+			validate: {
+				
+			}
+		}
+	},
 ];
 
 module.exports = route;

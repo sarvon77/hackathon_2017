@@ -215,4 +215,15 @@ productModel.smsSend = function(req,cb) {
 	});
 }
 
+productModel.getforAdmin = function(req,cb) {
+	var urlGet = "select * from product_order";
+	mysql.query(urlGet,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {					
+			cb(null,succ);
+		}
+	},1)
+}
+
 module.exports = productModel;
