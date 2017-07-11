@@ -225,7 +225,7 @@ productModel.getforAdmin = function(req,cb) {
 		} else {					
 			cb(null,succ);
 		}
-	},1)
+	},2)
 }
 
 module.exports = productModel;
