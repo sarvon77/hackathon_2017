@@ -60,7 +60,9 @@ var route = [
 					productCount: Joi.number().required(),
 					orderBy: Joi.string().required(),
 					orderFor: Joi.string().required(),
-					Location: Joi.string().required()
+					Location: Joi.string().required(),
+					"price":Joi.string().required(),
+					"image":Joi.string().required(),
 				}
 			}
 		}

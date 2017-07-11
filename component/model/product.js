@@ -44,8 +44,10 @@ productModel.saveToadmin = function(req,cb) {
 		orderBy = data.orderBy,
 		orderFor = data.orderFor,
 		Location = data.Location,
+		price = data.price,
+		image = data.image,
 		orderOn = moment().format("YYYY-MM-DD hh:mm:ss");
-	var insertQuery = "insert into product_order(productId,productName,productUrl,productCount,orderBy,orderFor,Location,orderOn) values('"+productId+"','"+productName+"','"+productUrl+"','"+productCount+"','"+orderBy+"','"+orderFor+"','"+Location+"','"+orderOn+"')";
+	var insertQuery = "insert into product_order(productId,productName,productUrl,productCount,orderBy,orderFor,Location,orderOn,image,price) values('"+productId+"','"+productName+"','"+productUrl+"','"+productCount+"','"+orderBy+"','"+orderFor+"','"+Location+"','"+orderOn+"','"+image+"','"+price+"')";
 	mysql.query(insertQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
