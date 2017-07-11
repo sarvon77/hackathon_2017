@@ -16,6 +16,9 @@ mysqlQuery.connect = function(cb,no) {
 			cb();
 		} else {
 			console.log("connected not mysql",err)
+			if(err.indexOf("TOO_MANY_USER") > -1){
+				console.log("****************************************");
+			}
 		}
 	});
 	
