@@ -7,8 +7,11 @@ const Vision = require('vision');
 const Joi = require('joi');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('./package');
-/*var mysql = require("./component/config/mysql");
-mysql.query("select * from mproduct_order",function(err,succ) {
+var mysql = require("./component/config/mysql");
+mysql.connect(function(){
+    console.log("connected DB")
+});
+/*mysql.query("select * from mproduct_order",function(err,succ) {
 	console.log(err || succ);
 });*/
 const server = new Hapi.Server();
