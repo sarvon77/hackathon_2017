@@ -97,7 +97,7 @@ productModel.jobsList = function(req,cb,isfn) {
 	} else {
 		parmasData = req.params.userId;
 	}
-	var getQuery = "select * from jobs where userId = '" + parmasData +"'";
+	var getQuery = "select * from jobs where userId = '" + parmasData +"' order by jobOn ASC";
 	mysql.query(getQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
