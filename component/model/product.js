@@ -1,5 +1,6 @@
 var request = require("request"),
 	moment = require("moment"),
+	_ = require("underscore"),
 	mysql = require("./../config/mysql")
 	flipkartKeys = {
 		"FkAffiliateId" :"sarvon77h",
@@ -224,7 +225,15 @@ productModel.youtubeSearch = function(req,cb) {
 	request(options, function(error, response, body){
 		if (!error && response.statusCode == 200) {
 			var info = JSON.parse(body);
-			cb(null,info);
+			var responseData = [];			
+			_.each(info.data.items,function(videoDetails) {
+				responseData.push({
+					"videoId":videoDetails.id.videoDetails,
+					"title":videoDetails.snippet.title,
+					"desc":videoDetails.snippet.description
+				})
+			})
+			cb(null,responseData);
 		} else {
 			cb(true);
 		}
