@@ -182,6 +182,20 @@ var route = [
 		}
 	},{
 		method: 'POST',
+		path:'/search-youtube', 		
+		config: {
+			description: 'search youtube',
+			notes: 'search youtube',
+			tags: ['api'],
+			handler: product.youtubeSearch,
+			validate: {
+				payload: {
+					query: Joi.string().required()
+				}
+			}
+		}
+	},{
+		method: 'POST',
 		path:'/job/completed', 		
 		config: {
 			description: 'Job status',

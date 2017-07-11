@@ -104,6 +104,15 @@ product.smsSend = function(req,reply) {
 		}
 	})
 }
+product.youtubeSearch = function(req,reply) {
+	productModel.youtubeSearch(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
 
 product.getforAdmin = function(req,reply) {
 	productModel.getforAdmin(req,function(err,succ){

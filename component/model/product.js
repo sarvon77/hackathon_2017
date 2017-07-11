@@ -87,7 +87,7 @@ productModel.engineerLocationGet = function(req,cb) {
 		} else {
 			cb(null,succ);
 		}
-	},1);
+	},3);
 }
 productModel.jobsList = function(req,cb,isfn) {		
 	var parmasData = "";
@@ -151,7 +151,7 @@ productModel.engineerLocationSet = function(req,cb) {
 				} else {
 					cb(null,{userId:(succ.insertId + 1)});
 				}
-			},1);
+			},3);
 		}
 	},3);
 }
@@ -191,7 +191,7 @@ productModel.jobCompleted = function(req,cb) {
 						}
 					});
 				}
-			},3)
+			},1)
 			_this.jobsList(req.payload.userId,function(err,data){
 				if(err){
 					cb(true,"failed");
@@ -200,7 +200,7 @@ productModel.jobCompleted = function(req,cb) {
 				}
 			},true);
 		}
-	},2);
+	},1);
 }
 productModel.smsSend = function(req,cb) {
 	var options = {
@@ -216,7 +216,20 @@ productModel.smsSend = function(req,cb) {
 		}
 	});
 }
-
+productModel.youtubeSearch = function(req,cb) {
+	var options = {
+	  url: "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBKRMeGLJPAZ63rkO4kwIqqxZKkFdtcT1c&part=snippet&q="+req.payload.query
+	};
+ 
+	request(options, function(error, response, body){
+		if (!error && response.statusCode == 200) {
+			var info = JSON.parse(body);
+			cb(null,info);
+		} else {
+			cb(true);
+		}
+	});
+}
 productModel.getforAdmin = function(req,cb) {
 	var urlGet = "select * from product_order";
 	mysql.query(urlGet,function(err,succ) {
