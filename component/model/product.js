@@ -157,7 +157,7 @@ productModel.engineerLocationSet = function(req,cb) {
 	},3);
 }
 productModel.getWeather = function(req,cb) {
-	
+	var _this = this;
 	var options = {
 	  url: "http://api.openweathermap.org/data/2.5/weather?lat="+req.payload.lat+"&lon="+req.payload.lon+"&appid=1a925075cbf3e058b53ac31d39b12f1e"
 	};
@@ -166,11 +166,45 @@ productModel.getWeather = function(req,cb) {
 		//console.log(req.payload,options);
 		if (!error && response.statusCode == 200) {
 			var info = JSON.parse(body);
-			cb(null,{weather:info});
+			_this.adminOrderCnt(function(err,succ) {
+				if(!err) {
+					_this.adminJobsCnt(function(cnterr,cntsucc){
+						if(cnterr){
+							cb(null,{weather:info,orderedProduct:succ});
+						} else {
+							cb(null,{weather:info,orderedProduct:succ,jobdetails:cntsucc});
+						}
+					})
+					
+				} else {
+					cb(null,{weather:info});
+				}
+			});
+			
 		} else {
 			cb(true);
 		}
 	});
+}
+productModel.adminOrderCnt = function(cb) {
+	var urlGet = "select count(*) as orderCnt from product_order";
+	mysql.query(urlGet,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {					
+			cb(null,succ[0]);
+		}
+	},2)
+}
+productModel.adminJobsCnt = function(cb) {
+	var urlGet = "select count(*) as JobsCnt from jobs group by status ";
+	mysql.query(urlGet,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {					
+			cb(null,succ[0]);
+		}
+	},2)
 }
 productModel.jobCompleted = function(req,cb) {
 	var _this = this;
