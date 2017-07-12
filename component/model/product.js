@@ -157,29 +157,34 @@ productModel.engineerLocationSet = function(req,cb) {
 	},3);
 }
 productModel.getWeather = function(req,cb) {
-	var _this = this;
+	var _this = this,
+		isAdmin = req.payload.isAdmin;
 	var options = {
 	  url: "http://api.openweathermap.org/data/2.5/weather?lat="+req.payload.lat+"&lon="+req.payload.lon+"&appid=1a925075cbf3e058b53ac31d39b12f1e"
 	};
- 
+ 	
 	request(options, function(error, response, body){
 		//console.log(req.payload,options);
 		if (!error && response.statusCode == 200) {
 			var info = JSON.parse(body);
-			_this.adminOrderCnt(function(err,succ) {
-				if(!err) {
-					_this.adminJobsCnt(function(cnterr,cntsucc){
-						if(cnterr){
-							cb(null,{weather:info,orderedProduct:succ});
-						} else {
-							cb(null,{weather:info,orderedProduct:succ,jobdetails:cntsucc});
-						}
-					})
-					
-				} else {
-					cb(null,{weather:info});
-				}
-			});
+			if(isAdmin) {				
+				_this.adminOrderCnt(function(err,succ) {
+					if(!err) {
+						_this.adminJobsCnt(function(cnterr,cntsucc){
+							if(cnterr){
+								cb(null,{weather:info,orderedProduct:succ});
+							} else {
+								cb(null,{weather:info,orderedProduct:succ,jobdetails:cntsucc});
+							}
+						})
+						
+					} else {
+						cb(null,{weather:info});
+					}
+				});
+			} else {
+				cb(null,{weather:info});
+			}
 			
 		} else {
 			cb(true);
