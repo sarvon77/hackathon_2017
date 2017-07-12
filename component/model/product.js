@@ -194,15 +194,15 @@ productModel.adminOrderCnt = function(cb) {
 		} else {					
 			cb(null,succ[0]);
 		}
-	},2)
+	},2) 
 }
 productModel.adminJobsCnt = function(cb) {
-	var urlGet = "select count(*) as JobsCnt from jobs group by status ";
+	var urlGet = "select count(*) as JobsCnt,status from jobs group by status";
 	mysql.query(urlGet,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
 		} else {					
-			cb(null,succ[0]);
+			cb(null,succ);
 		}
 	},2)
 }
