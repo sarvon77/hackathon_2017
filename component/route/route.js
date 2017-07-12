@@ -160,7 +160,8 @@ var route = [
 			validate: {
 				payload: {
 					lon: Joi.string().required(),
-					lat: Joi.string().required()
+					lat: Joi.string().required(),
+					isAdmin:Joi.boolean().required()
 				}
 			}
 		}
