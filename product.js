@@ -68,11 +68,9 @@ productModel.getToadmin = function(req,cb) {
 		}
 	},2);
 }
-
 productModel.engineerLocationGet = function(req,cb) {
 	var queryData = req.query,
-		id = "",
-		_this = this;
+		id = "";
 	var getQuery = "select * from engineer_location";
 	if(queryData.id || queryData.deviceId) {
 		if(queryData.id && queryData.deviceId) {
@@ -88,11 +86,7 @@ productModel.engineerLocationGet = function(req,cb) {
 		if(err) {
 			cb(true,"failed");
 		} else {
-			if(succ.length == 0) {
-				cb(null,[{"isNewUser":true}]);
-			} else{
-				cb(null,succ);
-			}			
+			cb(null,succ);
 		}
 	},3);
 }
@@ -163,34 +157,29 @@ productModel.engineerLocationSet = function(req,cb) {
 	},3);
 }
 productModel.getWeather = function(req,cb) {
-	var _this = this,
-		isAdmin = req.payload.isAdmin;
+	var _this = this;
 	var options = {
 	  url: "http://api.openweathermap.org/data/2.5/weather?lat="+req.payload.lat+"&lon="+req.payload.lon+"&appid=1a925075cbf3e058b53ac31d39b12f1e"
 	};
- 	
+ 
 	request(options, function(error, response, body){
 		//console.log(req.payload,options);
 		if (!error && response.statusCode == 200) {
 			var info = JSON.parse(body);
-			if(isAdmin) {				
-				_this.adminOrderCnt(function(err,succ) {
-					if(!err) {
-						_this.adminJobsCnt(function(cnterr,cntsucc){
-							if(cnterr){
-								cb(null,{weather:info,orderedProduct:succ});
-							} else {
-								cb(null,{weather:info,orderedProduct:succ,jobdetails:cntsucc});
-							}
-						})
-						
-					} else {
-						cb(null,{weather:info});
-					}
-				});
-			} else {
-				cb(null,{weather:info});
-			}
+			_this.adminOrderCnt(function(err,succ) {
+				if(!err) {
+					_this.adminJobsCnt(function(cnterr,cntsucc){
+						if(cnterr){
+							cb(null,{weather:info,orderedProduct:succ});
+						} else {
+							cb(null,{weather:info,orderedProduct:succ,jobdetails:cntsucc});
+						}
+					})
+					
+				} else {
+					cb(null,{weather:info});
+				}
+			});
 			
 		} else {
 			cb(true);
@@ -205,7 +194,7 @@ productModel.adminOrderCnt = function(cb) {
 		} else {					
 			cb(null,succ[0]);
 		}
-	},2) 
+	},2)
 }
 productModel.adminJobsCnt = function(cb) {
 	var urlGet = "select count(*) as JobsCnt,status from jobs group by status";
@@ -293,19 +282,6 @@ productModel.getforAdmin = function(req,cb) {
 			cb(null,succ);
 		}
 	},2)
-}
-
-productModel.register = function(req,cb) {
-	var payLoadData = req.payload;
-	var sqlQuery = "INSERT INTO `engineer_location`(`location`, `updateOn`, `engineerName`, `deviceId`, `rating`, `image`, `isAdmin`,`isCustomer`) VALUES ";
-	sqlQuery += " ('"+payLoadData.Location+"','"+moment().format("YYYY-MM-DD HH:mm:ss")+"','"+payLoadData.userName+"','"+payLoadData.deviceId+"',0,'"+payLoadData.image+"',0,1)";
-	mysql.query(sqlQuery,function(err,succ) {
-		if(err) {
-			cb(true,"failed");
-		} else {
-			cb(null,succ);
-		}
-	},2);
 }
 
 module.exports = productModel;

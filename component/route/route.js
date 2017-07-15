@@ -60,7 +60,9 @@ var route = [
 					productCount: Joi.number().required(),
 					orderBy: Joi.string().required(),
 					orderFor: Joi.string().required(),
-					Location: Joi.string().required()
+					Location: Joi.string().required(),
+					"price":Joi.string().required(),
+					"image":Joi.string().required(),
 				}
 			}
 		}
@@ -158,7 +160,8 @@ var route = [
 			validate: {
 				payload: {
 					lon: Joi.string().required(),
-					lat: Joi.string().required()
+					lat: Joi.string().required(),
+					isAdmin:Joi.boolean().required()
 				}
 			}
 		}
@@ -175,6 +178,20 @@ var route = [
 				payload: {
 					phone: Joi.string().required(),
 					msg: Joi.string().required()
+				}
+			}
+		}
+	},{
+		method: 'POST',
+		path:'/search-youtube', 		
+		config: {
+			description: 'search youtube',
+			notes: 'search youtube',
+			tags: ['api'],
+			handler: product.youtubeSearch,
+			validate: {
+				payload: {
+					query: Joi.string().required()
 				}
 			}
 		}
@@ -197,14 +214,15 @@ var route = [
 			}
 		}
 	},
+
 	{
 		method: 'GET',
 		path:'/product/admin', 		
 		config: {
-			description: 'Get admin product',
-			notes: 'Get admin product',
+			description: 'Get product admin',
+			notes: 'Get product admin',
 			tags: ['api'],
-			handler: product.getToadmin,
+			handler: product.getforAdmin,
 			validate: {
 				
 			}

@@ -95,16 +95,6 @@ product.jobCompleted = function(req,reply) {
 		}
 	})
 }
-product.adminProduct = function(req,reply) {
-	productModel.adminProduct(req,function(err,succ){
-		if(err){
-			return reply({status:400,"message":"failed"});
-		} else {
-			return reply({status:200,"data":succ});
-		}
-	})
-}
-
 product.smsSend = function(req,reply) {
 	productModel.smsSend(req,function(err,succ){
 		if(err){
@@ -114,6 +104,26 @@ product.smsSend = function(req,reply) {
 		}
 	})
 }
+product.youtubeSearch = function(req,reply) {
+	productModel.youtubeSearch(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
+
+product.getforAdmin = function(req,reply) {
+	productModel.getforAdmin(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
+
 product.register = function(req,reply) {
 	productModel.register(req,function(err,succ){
 		if(err){
@@ -123,5 +133,4 @@ product.register = function(req,reply) {
 		}
 	})
 }
-
 module.exports = product;
