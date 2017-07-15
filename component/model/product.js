@@ -44,7 +44,7 @@ productModel.saveToadmin = function(req,cb) {
 		orderBy = data.orderBy,
 		orderFor = data.orderFor,
 		Location = data.Location,
-		orderOn = moment().format("YYYY-MM-DD hh:mm:ss");
+		orderOn = moment().format("YYYY-MM-DD HH:mm:ss");
 	var insertQuery = "insert into product_order(productId,productName,productUrl,productCount,orderBy,orderFor,Location,orderOn) values('"+productId+"','"+productName+"','"+productUrl+"','"+productCount+"','"+orderBy+"','"+orderFor+"','"+Location+"','"+orderOn+"')";
 	mysql.query(insertQuery,function(err,succ) {
 		if(err) {
@@ -67,7 +67,8 @@ productModel.getToadmin = function(req,cb) {
 }
 productModel.engineerLocationGet = function(req,cb) {
 	var queryData = req.query,
-		id = "";
+		id = "",
+		_this = this;
 	var getQuery = "select * from engineer_location";
 	if(queryData.id || queryData.deviceId) {
 		if(queryData.id && queryData.deviceId) {
@@ -83,7 +84,11 @@ productModel.engineerLocationGet = function(req,cb) {
 		if(err) {
 			cb(true,"failed");
 		} else {
-			cb(null,succ);
+			if(succ.length == 0) {
+				cb(null,{"isNewUser":true});
+			} else{
+				cb(null,succ);
+			}			
 		}
 	},1);
 }
@@ -110,8 +115,8 @@ productModel.jobSave = function(req,cb) {
 		Address= data.Address,
 		customerName= data.customerName,
 		customerContactNo= data.customerContactNo,
-		jobOn= moment(data.jobOn).format("YYYY-MM-DD hh:mm:ss"),
-		appliedOn= moment().format("YYYY-MM-DD hh:mm:ss"),
+		jobOn= moment(data.jobOn).format("YYYY-MM-DD HH:mm:ss"),
+		appliedOn= moment().format("YYYY-MM-DD HH:mm:ss"),
 		reason= data.reason;
 	var insertQuery = "insert into `jobs`(`userId`,`Location`,`Address`,`customerName`,`customerContactNo`,`jobOn`,`appliedOn`,`reason`) values('"+userId+"','"+Location+"','"+Address+"','"+customerName+"','"+customerContactNo+"','"+jobOn+"','"+appliedOn+"','"+reason+"')";
 	mysql.query(insertQuery,function(err,succ) {
@@ -126,7 +131,7 @@ productModel.engineerLocationSet = function(req,cb) {
 	var data = req.payload;
 	var id = data.id,
 		location = data.location,
-		updateOn = moment().format("YYYY-MM-DD hh:mm:ss"),
+		updateOn = moment().format("YYYY-MM-DD HH:mm:ss"),
 		engineerName = data.name;
 	var getQuery = "select * from engineer_location where id='"+id+"'";
 	mysql.query(getQuery,function(err,succ) {
@@ -214,5 +219,29 @@ productModel.smsSend = function(req,cb) {
 		}
 	});
 }
+productModel.adminProduct = function(req,cb,isfn) {		
+	
+	var getQuery = "SELECT * FROM product_order";
+	mysql.query(getQuery,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,succ);
+		}
+	},2);
+}
+
+productModel.register = function(req,cb) {
+	var payLoadData = req.payload;
+	var sqlQuery = "INSERT INTO `engineer_location`(`location`, `updateOn`, `engineerName`, `deviceId`, `rating`, `image`, `isAdmin`,`isCustomer`) VALUES ";
+	sqlQuery += " ('"+payLoadData.Location+"','"+moment().format("YYYY-MM-DD HH:mm:ss")+"','"+payLoadData.userName+"','"+payLoadData.deviceId+"',0,'"+payLoadData.image+"',0,1)";
+	mysql.query(sqlQuery,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,succ);
+		}
+	},2);
+}	
 
 module.exports = productModel;

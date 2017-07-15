@@ -197,6 +197,36 @@ var route = [
 			}
 		}
 	},
+	{
+		method: 'GET',
+		path:'/product/admin', 		
+		config: {
+			description: 'Get admin product',
+			notes: 'Get admin product',
+			tags: ['api'],
+			handler: product.getToadmin,
+			validate: {
+				
+			}
+		}
+	},{
+		method: 'POST',
+		path:'/register', 		
+		config: {
+			description: 'register new Device',
+			notes: 'register new Device',
+			tags: ['api'],
+			handler: product.register,
+			validate: {
+				payload: {
+					deviceId: Joi.string().required(),
+					userName: Joi.string().required(),
+					"Location":Joi.string().required(),
+					"image":Joi.string().required()
+				}
+			}
+		}
+	}
 ];
 
 module.exports = route;
