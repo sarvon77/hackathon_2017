@@ -133,4 +133,13 @@ product.register = function(req,reply) {
 		}
 	})
 }
+product.assignJob = function(req,reply) {
+	productModel.assignJob(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
 module.exports = product;

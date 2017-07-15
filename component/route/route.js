@@ -121,7 +121,7 @@ var route = [
 			handler: product.jobSave,
 			validate: {
 				payload:{
-					userId:Joi.string().required(),
+					userId:Joi.string().valid('').optional(),
 					Location: Joi.string().required(),
 					Address: Joi.string().required(),
 					customerName: Joi.string().required(),
@@ -242,6 +242,21 @@ var route = [
 					"Location":Joi.string().required(),
 					"image":Joi.string().required(),
 					"mobileNo":Joi.string().required(),
+				}
+			}
+		}
+	},{
+		method: 'POST',
+		path:'/assignJob', 		
+		config: {
+			description: 'assign job to user',
+			notes: 'assign job to user',
+			tags: ['api'],
+			handler: product.assignJob,
+			validate: {
+				payload: {
+					id: Joi.string().required(),
+					userId: Joi.string().required()
 				}
 			}
 		}

@@ -114,7 +114,7 @@ productModel.jobsList = function(req,cb,isfn) {
 }
 productModel.jobSave = function(req,cb) {
 	var data = req.payload;
-	var userId = data.userId,
+	var userId = data.userId || "",
 		Location= data.Location,
 		Address= data.Address,
 		customerName= data.customerName,
@@ -308,4 +308,14 @@ productModel.register = function(req,cb) {
 	},2);
 }
 
+productModel.assignJob = function(req,cb) {
+	var updateQuery = "UPDATE engineer_location SET location =''"+req.payload.userId+"' where id='"+req.payload.id+"'";
+	mysql.query(updateQuery,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,"success");
+		}
+	},2)
+}
 module.exports = productModel;
