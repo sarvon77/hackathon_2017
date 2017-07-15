@@ -240,7 +240,8 @@ var route = [
 					deviceId: Joi.string().required(),
 					userName: Joi.string().required(),
 					"Location":Joi.string().required(),
-					"image":Joi.string().required()
+					"image":Joi.string().required(),
+					"mobileNo":Joi.string().required(),
 				}
 			}
 		}

@@ -297,8 +297,8 @@ productModel.getforAdmin = function(req,cb) {
 
 productModel.register = function(req,cb) {
 	var payLoadData = req.payload;
-	var sqlQuery = "INSERT INTO `engineer_location`(`location`, `updateOn`, `engineerName`, `deviceId`, `rating`, `image`, `isAdmin`,`isCustomer`) VALUES ";
-	sqlQuery += " ('"+payLoadData.Location+"','"+moment().format("YYYY-MM-DD HH:mm:ss")+"','"+payLoadData.userName+"','"+payLoadData.deviceId+"',0,'"+payLoadData.image+"',0,1)";
+	var sqlQuery = "INSERT INTO `engineer_location`(`location`, `updateOn`, `engineerName`, `deviceId`, `rating`, `image`, `isAdmin`,`isCustomer`,`mobileNo`) VALUES ";
+	sqlQuery += " ('"+payLoadData.Location+"','"+moment().format("YYYY-MM-DD HH:mm:ss")+"','"+payLoadData.userName+"','"+payLoadData.deviceId+"',0,'"+payLoadData.image+"',0,1,'"+payLoadData.mobileNo+"')";
 	mysql.query(sqlQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
