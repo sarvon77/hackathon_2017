@@ -98,12 +98,18 @@ productModel.engineerLocationGet = function(req,cb) {
 }
 productModel.jobsList = function(req,cb,isfn) {		
 	var parmasData = "";
+	var getQuery = "";
+	
 	if(isfn) {
 		parmasData = req;
-	} else {
+		getQuery = "select * from jobs where userId = '" + parmasData +"' order by jobOn ASC";
+	} else if(req.params.userId !="{userId}") {
 		parmasData = req.params.userId;
+		getQuery = "select * from jobs where userId = '" + parmasData +"' order by jobOn ASC";
+	} else {
+		getQuery = "select * from jobs order by jobOn ASC";
 	}
-	var getQuery = "select * from jobs where userId = '" + parmasData +"' order by jobOn ASC";
+	console.log(req.params.userId)
 	mysql.query(getQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");

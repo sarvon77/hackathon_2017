@@ -106,7 +106,7 @@ var route = [
 			handler: product.jobsList,
 			validate: {
 				params:{
-					userId:Joi.string().required()
+					userId:Joi.string().optional()
 				}
 			}
 		}
