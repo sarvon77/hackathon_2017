@@ -66,6 +66,15 @@ product.jobSave = function(req,reply) {
 		}
 	})
 }
+product.jobUserList = function(req,reply) {
+	productModel.jobUserList(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
 
 
 product.engineerLocationGet = function(req,reply) {

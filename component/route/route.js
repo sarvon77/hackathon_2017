@@ -122,12 +122,28 @@ var route = [
 			validate: {
 				payload:{
 					userId:Joi.string().valid('').optional(),
+					postedBy:Joi.string().required(),
 					Location: Joi.string().required(),
 					Address: Joi.string().required(),
 					customerName: Joi.string().required(),
 					customerContactNo: Joi.string().required(),
 					jobOn: Joi.string().required(),
 					reason: Joi.string().required()
+				}
+			}
+		}
+	},
+	{
+		method: 'GET',
+		path:'/job/user/{id}', 		
+		config: {
+			description: 'Get engineer-job-save',
+			notes: 'Get engineer-job-save',
+			tags: ['api'],
+			handler: product.jobUserList,
+			validate: {
+				params:{
+					id:Joi.string().optional()
 				}
 			}
 		}

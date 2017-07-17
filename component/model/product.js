@@ -121,6 +121,7 @@ productModel.jobsList = function(req,cb,isfn) {
 productModel.jobSave = function(req,cb) {
 	var data = req.payload;
 	var userId = data.userId || "",
+		postedBy= data.postedBy,
 		Location= data.Location,
 		Address= data.Address,
 		customerName= data.customerName,
@@ -128,7 +129,7 @@ productModel.jobSave = function(req,cb) {
 		jobOn= moment(data.jobOn).format("YYYY-MM-DD hh:mm:ss"),
 		appliedOn= moment().format("YYYY-MM-DD hh:mm:ss"),
 		reason= data.reason;
-	var insertQuery = "insert into `jobs`(`userId`,`Location`,`Address`,`customerName`,`customerContactNo`,`jobOn`,`appliedOn`,`reason`) values('"+userId+"','"+Location+"','"+Address+"','"+customerName+"','"+customerContactNo+"','"+jobOn+"','"+appliedOn+"','"+reason+"')";
+	var insertQuery = "insert into `jobs`(`userId`,`postedBy`,`Location`,`Address`,`customerName`,`customerContactNo`,`jobOn`,`appliedOn`,`reason`) values('"+userId+"','"+postedBy+"','"+Location+"','"+Address+"','"+customerName+"','"+customerContactNo+"','"+jobOn+"','"+appliedOn+"','"+reason+"')";
 	mysql.query(insertQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
@@ -314,6 +315,16 @@ productModel.register = function(req,cb) {
 	},2);
 }
 
+productModel.jobUserList = function(req,cb) {
+	var urlGet = "select * from jobs where postedBy = '"+req.params.id+"' order by jobOn ASC ";
+	mysql.query(urlGet,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {					
+			cb(null,succ);
+		}
+	},2)
+}
 productModel.assignJob = function(req,cb) {
 	var updateQuery = "UPDATE engineer_location SET location =''"+req.payload.userId+"' where id='"+req.payload.id+"'";
 	mysql.query(updateQuery,function(err,succ) {
