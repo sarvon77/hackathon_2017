@@ -324,17 +324,20 @@ productModel.jobUserList = function(req,cb) {
 			cb(true,"failed");
 		} else {
 			var postData = [];
+			var i=0;
 			async.each(succ,function(data,eachcb) {
 				postData.push(data);
-				if(data.userId){
+				if(data.userId != ""){
 					var sqlQuery = "select * from engineer_location where id ='" + data.userId + "'";
 					mysql.query(urlGet,function(err,innerSucc) {
 						if(!err){
-							postData[postData.length - 1].engineerDetails = innerSucc[0];
+							postData[i].engineerDetails = innerSucc[0];
 						}
+						i++;
 						eachcb();
 					});
 				} else {
+					i++;
 					eachcb();
 				}				
 
