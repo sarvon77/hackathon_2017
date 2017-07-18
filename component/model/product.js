@@ -329,10 +329,10 @@ productModel.jobUserList = function(req,cb) {
 				postData.push(data);
 				if(data.userId != ""){
 					var sqlQuery = "select * from engineer_location where id ='" + data.userId + "'";
-					mysql.query(urlGet,function(err,innerSucc) {
+					mysql.query(sqlQuery,function(err,innerSucc) {
 						if(!err){
-							postData[i].engineerDetails = {"hgjgh":"ghjghg"};
-							console.log(innerSucc)
+							postData[i].engineerDetails = innerSucc[0];
+							//console.log(innerSucc)
 						}
 						i++;
 						eachcb();
