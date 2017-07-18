@@ -324,7 +324,7 @@ productModel.jobUserList = function(req,cb) {
 			cb(true,"failed");
 		} else {
 			var postData = [];
-			async.each(succ,function(data.cb) {
+			async.each(succ,function(data,eachcb) {
 				postData.push(data);
 				if(data.userId){
 					var sqlQuery = "select * from engineer_location where id ='" + data.userId + "'";
@@ -332,10 +332,10 @@ productModel.jobUserList = function(req,cb) {
 						if(!err){
 							postData[postData.length - 1].engineerDetails = innerSucc[0];
 						}
-						cb();
+						eachcb();
 					}
 				} else {
-					cb();
+					eachcb();
 				}				
 
 			},function(err,cbSuc) {
