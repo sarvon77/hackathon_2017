@@ -333,7 +333,7 @@ productModel.jobUserList = function(req,cb) {
 							postData[postData.length - 1].engineerDetails = innerSucc[0];
 						}
 						eachcb();
-					}
+					});
 				} else {
 					eachcb();
 				}				
