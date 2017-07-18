@@ -1,6 +1,7 @@
 var request = require("request"),
 	moment = require("moment"),
 	_ = require("underscore"),
+	async = require("async"),
 	mysql = require("./../config/mysql")
 	flipkartKeys = {
 		"FkAffiliateId" :"sarvon77h",
@@ -316,12 +317,32 @@ productModel.register = function(req,cb) {
 }
 
 productModel.jobUserList = function(req,cb) {
-	var urlGet = "select a.*,b.engineerName,b.image,b.mobileNo from jobs as a,engineer_location as b where a.postedBy = '"+req.params.id+"' and a.userId = b.id order by jobOn ASC ";
+	var urlGet = "select * from jobs where postedBy = '"+req.params.id+"' order by jobOn ASC ";
 	mysql.query(urlGet,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
-		} else {					
-			cb(null,succ);
+		} else {
+			var postData = [];
+			async.each(succ,function(data.cb) {
+				postData.push(data);
+				if(data.userId){
+					var sqlQuery = "select * from engineer_location where id ='" + data.userId + "'";
+					mysql.query(urlGet,function(err,innerSucc) {
+						if(!err){
+							postData[postData.length - 1].engineerDetails = innerSucc[0];
+						}
+						cb();
+					}
+				} else {
+					cb();
+				}				
+
+			},function(err,cbSuc) {
+				if(!err) {
+					cb(null,postData)
+				}
+			})					
+			//cb(null,succ);
 		}
 	},2)
 }
