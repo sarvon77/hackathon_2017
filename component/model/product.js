@@ -316,7 +316,7 @@ productModel.register = function(req,cb) {
 }
 
 productModel.jobUserList = function(req,cb) {
-	var urlGet = "select * from jobs where postedBy = '"+req.params.id+"' order by jobOn ASC ";
+	var urlGet = "select a.*,b.engineerName,b.image,b.mobileNo from jobs as a,engineer_location as b where a.postedBy = '"+req.params.id+"' and a.userId = b.id order by jobOn ASC ";
 	mysql.query(urlGet,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
