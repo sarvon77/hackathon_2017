@@ -9,6 +9,7 @@ var request = require("request"),
 		"url":"https://affiliate-api.flipkart.net/affiliate/search/json?"
 	},
 	productModel = {};
+	console.log(async)
 productModel.searchNearBy = function(req,cb) {
 	cb(null,{list:[
 	{location:"chennai","shopList":[
