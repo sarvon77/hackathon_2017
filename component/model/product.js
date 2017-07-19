@@ -352,7 +352,7 @@ productModel.jobUserList = function(req,cb) {
 	},2)
 }
 productModel.assignJob = function(req,cb) {
-	var updateQuery = "UPDATE jobs SET userId =''"+req.payload.userId+"' where id='"+req.payload.id+"'";
+	var updateQuery = "UPDATE jobs SET userId ='"+req.payload.userId+"' where id='"+req.payload.id+"'";
 	mysql.query(updateQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
