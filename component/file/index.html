@@ -1,6 +1,6 @@
 asSA
-<div id="dd">
-</div>
+<div id="dd"></div>
+<div id="ddd"></div>
 <script>
 		var recognition = new webkitSpeechRecognition();
 
@@ -34,8 +34,19 @@ console.log("onstart", event);
 } 
 
 // Process parsed result
-recognition.onresult = function(event){ 
-	document.getElementById("dd").innerHTML = event.results[0][0].transcript
+recognition.onresult = function(event){
+	var interim_transcript = '',
+		final_transcript ='';
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+	document.getElementById("dd").innerHTML = final_transcript;
+	document.getElementById("ddd").innerHTML = interim_transcript;
 }
 
 // Handle error
