@@ -276,6 +276,18 @@ var route = [
 				}
 			}
 		}
+	},
+	{
+		method: 'GET',
+		path:'/speech', 		
+		config: {
+			description: 'x',
+			notes: 'x',
+			tags: ['api'],
+			handler: product.speech,
+			validate: {
+			}
+		}
 	}
 ];
 

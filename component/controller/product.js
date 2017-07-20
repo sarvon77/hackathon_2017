@@ -151,4 +151,7 @@ product.assignJob = function(req,reply) {
 		}
 	})
 }
+product.speech = function(req,reply) {
+	return reply({"text":"test"})
+}
 module.exports = product;
