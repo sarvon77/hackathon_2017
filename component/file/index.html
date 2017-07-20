@@ -35,7 +35,7 @@ console.log("onstart", event);
 
 // Process parsed result
 recognition.onresult = function(event){ 
-console.log("onresult", event);
+	document.getElementById("dd").innerHTML = event.results[0][0].transcript
 }
 
 // Handle error
