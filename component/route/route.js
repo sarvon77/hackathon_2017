@@ -1,5 +1,6 @@
 const Joi = require('joi');
-var product = require("../controller/product")
+var product = require("../controller/product");
+var path = require('path');
 var route = [
 	{
 		method: 'GET',
