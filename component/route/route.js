@@ -284,8 +284,8 @@ var route = [
 			description: 'x',
 			notes: 'x',
 			tags: ['api'],
-			handler: product.speech,
-			validate: {
+			handler:  {
+			    file: path.join(__dirname, '../file/index.html')
 			}
 		}
 	}
