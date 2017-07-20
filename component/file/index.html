@@ -40,7 +40,7 @@ recognition.onresult = function(event){
 
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
-      	recognition.start();	
+      	//recognition.start();	
         final_transcript += event.results[i][0].transcript;
       } else {
         interim_transcript += event.results[i][0].transcript;
@@ -57,6 +57,6 @@ console.log("onerror", event);
 
 // Housekeeping after success or failed parsing
 recognition.onend = function(){ 
-console.log("onend");
+	recognition.start();
 }
 </script>
