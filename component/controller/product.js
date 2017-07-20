@@ -152,6 +152,6 @@ product.assignJob = function(req,reply) {
 	})
 }
 product.speech = function(req,reply) {
-	return reply({"text":"test"})
+	return reply.file('../file/index.html');
 }
 module.exports = product;

@@ -1,0 +1,50 @@
+asSA
+<div id="dd">
+</div>
+<script>
+		var recognition = new webkitSpeechRecognition();
+
+		// Are we processing a short phrase or performing continuous dictation?
+		recognition.continuous = true; 
+
+		// Do we require interim results in addition to the final results?
+		recognition.interimResults = true;
+
+		// We speak The Queens English here, my good man
+		recognition.lang = 'en-GB' 
+
+		// Kick off the Speech to Text recognition process
+		recognition.start();
+		var recognition = new webkitSpeechRecognition();
+
+// Are we processing a short phrase or performing continuous dictation?
+recognition.continuous = true; 
+
+// Do we require interim results in addition to the final results?
+recognition.interimResults = true;
+
+// We speak The Queens English here, my good man
+recognition.lang = 'en-GB' 
+
+// Kick off the Speech to Text recognition process
+recognition.start();	
+	// Set up 
+recognition.onstart = function(event){ 
+console.log("onstart", event);
+} 
+
+// Process parsed result
+recognition.onresult = function(event){ 
+console.log("onresult", event);
+}
+
+// Handle error
+recognition.onerror = function(event){
+console.log("onerror", event);
+}
+
+// Housekeeping after success or failed parsing
+recognition.onend = function(){ 
+console.log("onend");
+}
+</script>
