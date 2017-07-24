@@ -111,7 +111,7 @@ productModel.jobsList = function(req,cb,isfn) {
 	} else {
 		getQuery = "select * from jobs order by jobOn ASC";
 	}
-	console.log(req.params.userId)
+	//console.log(req.params.userId)
 	mysql.query(getQuery,function(err,succ) {
 		if(err) {
 			cb(true,"failed");
