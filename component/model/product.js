@@ -175,7 +175,7 @@ productModel.getWeather = function(req,cb) {
 	var _this = this,
 		isAdmin = req.payload.isAdmin;
 	var options = {
-	  url: "http://api.openweathermap.org/data/2.5/weather?lat="+req.payload.lat+"&lon="+req.payload.lon+"&appid=1a925075cbf3e058b53ac31d39b12f1e"
+	  url: "http://api.openweathermap.org/data/2.5/weather?units=metric&lat="+req.payload.lat+"&lon="+req.payload.lon+"&appid=1a925075cbf3e058b53ac31d39b12f1e"
 	};
  	
 	request(options, function(error, response, body){
