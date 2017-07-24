@@ -273,7 +273,7 @@ productModel.smsSend = function(req,cb) {
 }
 productModel.youtubeSearch = function(req,cb) {
 	var options = {
-	  url: "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBKRMeGLJPAZ63rkO4kwIqqxZKkFdtcT1c&part=snippet&q="+req.payload.query
+	  url: "https://www.googleapis.com/youtube/v3/search?key=AIzaSyDLcZXtAtz7CATMGI71BQlJgkIo5Knce98&part=snippet&q="+req.payload.query
 	};
  
 	request(options, function(error, response, body){
