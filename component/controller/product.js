@@ -39,6 +39,15 @@ product.seachedtext = function(req,reply) {
 		}
 	})
 }
+product.seachedtextGet = function(req,reply) {
+	productModel.seachedtextGet(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":succ});
+		}
+	})
+}
 product.getToadmin = function(req,reply) {
 	productModel.getToadmin(req,function(err,succ){
 		if(err){

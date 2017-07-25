@@ -371,4 +371,14 @@ productModel.seachedtext = function(req,cb) {
 		}
 	},2)
 }
+productModel.seachedtextGet = function(req,cb) {
+	var updateQuery = "select * from searchQuery";
+	mysql.query(updateQuery,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,succ);
+		}
+	},2)
+}
 module.exports = productModel;

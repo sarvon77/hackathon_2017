@@ -295,6 +295,18 @@ var route = [
 	},
 	{
 		method: 'GET',
+		path:'/search-keyword-get', 		
+		config: {
+			description: 'searched text',
+			notes: 'searched text',
+			tags: ['api'],
+			handler: product.seachedtextGet,
+			validate: {
+			}
+		}
+	},
+	{
+		method: 'GET',
 		path:'/speech', 		
 		config: {
 			description: 'x',
