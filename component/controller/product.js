@@ -30,6 +30,15 @@ product.saveToadmin = function(req,reply) {
 		}
 	})
 }
+product.seachedtext = function(req,reply) {
+	productModel.seachedtext(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":"success"});
+		}
+	})
+}
 product.getToadmin = function(req,reply) {
 	productModel.getToadmin(req,function(err,succ){
 		if(err){

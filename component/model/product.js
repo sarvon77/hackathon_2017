@@ -361,4 +361,14 @@ productModel.assignJob = function(req,cb) {
 		}
 	},2)
 }
+productModel.seachedtext = function(req,cb) {
+	var updateQuery = "insert into searchQuery(`userId`,`text`) values('"+req.payload.userId+"','"+req.payload.text+"')";
+	mysql.query(updateQuery,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,"success");
+		}
+	},2)
+}
 module.exports = productModel;

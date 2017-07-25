@@ -277,6 +277,21 @@ var route = [
 				}
 			}
 		}
+	},{
+		method: 'POST',
+		path:'/search-keyword', 		
+		config: {
+			description: 'searched text',
+			notes: 'searched text',
+			tags: ['api'],
+			handler: product.seachedtext,
+			validate: {
+				payload: {
+					text: Joi.string().required(),
+					userId: Joi.string().required()
+				}
+			}
+		}
 	},
 	{
 		method: 'GET',
