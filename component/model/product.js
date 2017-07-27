@@ -116,7 +116,31 @@ productModel.jobsList = function(req,cb,isfn) {
 		if(err) {
 			cb(true,"failed");
 		} else {
-			cb(null,succ);
+			var postData = [];
+			var i=0;
+			async.each(succ,function(data,eachcb) {
+				postData.push(data);
+				if(data.userId != ""){
+					var sqlQuery = "select * from engineer_location where id ='" + data.userId + "'";
+					mysql.query(sqlQuery,function(err,innerSucc) {
+						if(!err){
+							postData[i].engineerDetails = innerSucc[0];
+							//console.log(innerSucc)
+						}
+						i++;
+						eachcb();
+					});
+				} else {
+					i++;
+					eachcb();
+				}				
+
+			},function(err,cbSuc) {
+				if(!err) {
+					cb(null,postData)
+				}
+			})
+			//cb(null,succ);
 		}
 	},1);
 }
