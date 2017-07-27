@@ -405,4 +405,15 @@ productModel.seachedtextGet = function(req,cb) {
 		}
 	},2)
 }
+productModel.engineerStatus = function(req,cb) {
+	var updateQuery = "UPDATE engineer_location SET status ='"+req.payload.status+"' where id='"+req.payload.userId+"'";
+	mysql.query(updateQuery,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,"success");
+		}
+	},2)
+}
+
 module.exports = productModel;

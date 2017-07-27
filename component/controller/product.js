@@ -169,6 +169,16 @@ product.assignJob = function(req,reply) {
 		}
 	})
 }
+product.engineerStatus = function(req,reply) {
+	productModel.engineerStatus(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":"success"});
+		}
+	})
+}
+
 product.speech = function(req,reply) {
 	return reply.file('../file/index.html');
 }

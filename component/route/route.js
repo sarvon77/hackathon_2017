@@ -294,6 +294,22 @@ var route = [
 		}
 	},
 	{
+		method: 'POST',
+		path:'/engineer-status', 		
+		config: {
+			description: 'searched text',
+			notes: 'searched text',
+			tags: ['api'],
+			handler: product.engineerStatus,
+			validate: {
+				payload: {
+					status: Joi.string().required(),
+					userId: Joi.string().required()
+				}
+			}
+		}
+	},
+	{
 		method: 'GET',
 		path:'/search-keyword-get', 		
 		config: {
