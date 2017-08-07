@@ -152,8 +152,8 @@ productModel.jobSave = function(req,cb) {
 		Address= data.Address,
 		customerName= data.customerName,
 		customerContactNo= data.customerContactNo,
-		jobOn= moment(data.jobOn).format("YYYY-MM-DD hh:mm:ss"),
-		appliedOn= moment().format("YYYY-MM-DD hh:mm:ss"),
+		jobOn= moment(data.jobOn).format("YYYY-MM-DD HH:mm:ss"),
+		appliedOn= moment().format("YYYY-MM-DD HH:mm:ss"),
 		reason= data.reason;
 	var insertQuery = "insert into `jobs`(`userId`,`postedBy`,`Location`,`Address`,`customerName`,`customerContactNo`,`jobOn`,`appliedOn`,`reason`) values('"+userId+"','"+postedBy+"','"+Location+"','"+Address+"','"+customerName+"','"+customerContactNo+"','"+jobOn+"','"+appliedOn+"','"+reason+"')";
 	mysql.query(insertQuery,function(err,succ) {
