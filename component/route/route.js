@@ -323,6 +323,18 @@ var route = [
 	},
 	{
 		method: 'GET',
+		path:'/truncate-table', 		
+		config: {
+			description: 'table',
+			notes: 'table',
+			tags: ['api'],
+			handler: product.truncateTables,
+			validate: {
+			}
+		}
+	},
+	{
+		method: 'GET',
 		path:'/speech', 		
 		config: {
 			description: 'x',

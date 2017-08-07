@@ -182,4 +182,14 @@ product.engineerStatus = function(req,reply) {
 product.speech = function(req,reply) {
 	return reply.file('../file/index.html');
 }
+product.truncateTables = function(req,reply) {
+	productModel.truncateTables(req,function(err,succ){
+		if(err){
+			return reply({status:400,"message":"failed"});
+		} else {
+			return reply({status:200,"data":"success"});
+		}
+	})
+}
+
 module.exports = product;

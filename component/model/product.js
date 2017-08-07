@@ -415,5 +415,15 @@ productModel.engineerStatus = function(req,cb) {
 		}
 	},2)
 }
+productModel.truncateTables = function(req,cb) {
+	var queryData = "truncate table engineer_location;INSERT INTO `engineer_location` (`location`, `updateOn`, `engineerName`, `deviceId`, `rating`, `image`, `isAdmin`, `isCustomer`, `mobileNo`, `status`, `expert`) VALUES ('12.9130558,80.21937279999997', '2017-08-03 04:55:59', 'saravanan', 'c0e9928ff73b8fa1', '3', 'saravanan', '1', 0, '8903639221', 'A', ''),('12.9949978,80.26008619999993', '2017-08-06 07:34:16', 'Vignesh', '1234567890', '4', 'vignesh', '0', 0, '9940054516', 'A', 'ac'),('12.9950227,80.26013979999993', '2017-07-20 06:47:52', 'raama ragavan', '33ff4664f90dc3b3', '0', 'user', '0', 1, '9940 955 107', 'A', ''),('12.9950227,80.26013979999993', '2017-07-20 06:53:26', 'Bob', '1234509876', '4', 'ragav', '0', 1, '9940955107', 'A', ''),('13.0710423,80.2514902', '2017-07-20 06:53:26', 'Anbu', '1', '4', 'anbu', '0', 0, '8903639221', 'W', 'ac'),('13.0344152,80.2099999', '2017-07-20 06:53:26', 'Raja', '1', '4', 'raju', '0', 0, '8903639221', 'B', 'tv'),('12.9411688,80.1779817', '2017-07-20 06:53:26', 'Ramu', '1', '4', 'ramu', '0', 0, '8903639221', 'A', 'tv'),('13.0067346,80.2417758', '2017-07-20 06:53:26', 'Dinesh', '1', '4', 'dinesh', '0', 0, '8903639221', 'B', 'ac'),('12.9917889,80.2253708', '2017-07-20 06:53:26', 'Kabali', '1', '4', 'kabali', '0', 0, '8903639221', 'W', 'tv');truncate table jobs;truncate table product_order;INSERT INTO `product_order` (`image`, `productId`, `productName`, `productUrl`, `productCount`, `orderBy`, `orderFor`, `Location`, `orderOn`, `price`) VALUES('http://img.fkcdn.com/image/mobile/f/d/5/mi-redmi-note-4-na-200x200-imaeqdxqcrfshtqu.jpeg', 'MOBEQ98THNGR4FD5', 'Redmi Note 4 (Black, 32 GB)', 'https://dl.flipkart.com/dl/redmi-note-4-black-32-gb/p/itmeqe4htst9587b?pid=MOBEQ98THNGR4FD5&affid=sarvon77h', 6, '2', '1', 'LOCATION', '2017-07-26 06:53:03', '10999'),('http://img.fkcdn.com/image/j3j1le80/mobile/t/g/m/lenovo-k6-note-k53a48-200x200-imaeuknxfnvvzghw.jpeg', 'MOBEUMXZ2PDSTTGM', 'Lenovo K6 Note (Gold, 32 GB)', 'https://dl.flipkart.com/dl/lenovo-k6-note-gold-32-gb/p/itmevt7zzzabffgd?pid=MOBEUMXZ2PDSTTGM&affid=sarvon77h', 5, '2', '1', 'LOCATION', '2017-07-27 03:34:24', '14999'),('http://img.fkcdn.com/image/smartwatch/g/y/n/ftw1126-fossil-200x200-imaepf32budbptvx.jpeg', 'SMWEP8ZA2D6NXGYN', 'Fossil Q Crewmaster Hybrid (For Men) Smartwatch', 'https://dl.flipkart.com/dl/fossil-q-crewmaster-hybrid-for-men-smartwatch/p/itmep8zasxhzafjz?pid=SMWEP8ZA2D6NXGYN&affid=sarvon77h', 1, '2', '1', 'LOCATION', '2017-07-30 12:51:47', '13995');truncate table searchQuery;INSERT INTO `searchQuery` (`id`, `text`, `userId`) VALUES(1, 'Customer phone no?', 1),(2, 'where is pvr cinemas near to me?', 1);";
+	mysql.query(queryData,function(err,succ) {
+		if(err) {
+			cb(true,"failed");
+		} else {
+			cb(null,"success");
+		}
+	},2)
+}
 
 module.exports = productModel;
