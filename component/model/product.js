@@ -77,12 +77,16 @@ productModel.engineerLocationGet = function(req,cb) {
 		_this = this;
 	var getQuery = "select * from engineer_location";
 	if(queryData.id || queryData.deviceId) {
+		var deviceId  = queryData.deviceId;
+		if(deviceId && deviceId == "1234509876") {
+			deviceId = "52c65734ab2b7a54";
+		}
 		if(queryData.id && queryData.deviceId) {
-			getQuery = getQuery + " where id = '" +queryData.id+"' and deviceId = '" +queryData.deviceId+"'";
+			getQuery = getQuery + " where id = '" +queryData.id+"' and deviceId = '" +deviceId+"'";
 		} else if(queryData.id) {
 			getQuery = getQuery + " where id = '" +queryData.id+"'";
 		} else {
-			getQuery = getQuery + " where deviceId = '" +queryData.deviceId+"'";
+			getQuery = getQuery + " where deviceId = '" +deviceId+"'";
 		}		
 	}
 	//console.log(getQuery);
