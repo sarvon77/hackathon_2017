@@ -49,7 +49,7 @@ productModel.saveToadmin = function(req,cb) {
 		Location = data.Location,
 		price = data.price,
 		image = data.image,
-		orderOn = moment().format("YYYY-MM-DD hh:mm:ss");
+		orderOn = moment().format("YYYY-MM-DD HH:mm:ss");
 	var insertQuery = "insert into product_order(productId,productName,productUrl,productCount,orderBy,orderFor,Location,orderOn,image,price) values('"+productId+"','"+productName+"','"+productUrl+"','"+productCount+"','"+orderBy+"','"+orderFor+"','"+Location+"','"+orderOn+"','"+image+"','"+price+"')";
 	mysql.query(insertQuery,function(err,succ) {
 		if(err) {
@@ -168,7 +168,7 @@ productModel.engineerLocationSet = function(req,cb) {
 	var data = req.payload;
 	var id = data.id,
 		location = data.location,
-		updateOn = moment().format("YYYY-MM-DD hh:mm:ss"),
+		updateOn = moment().format("YYYY-MM-DD HH:mm:ss"),
 		engineerName = data.name;
 	var getQuery = "select * from engineer_location where id='"+id+"'";
 	mysql.query(getQuery,function(err,succ) {
