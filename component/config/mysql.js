@@ -3,13 +3,20 @@ var mysqlQuery = {};
 var _this = this;
 
 mysqlQuery.connect = function(cb,no) {
-	_this.connection = mysql.createConnection({
+	var configHelioHost = {
 	  host     : 'sarvon77.heliohost.org',
 	  //user     : no == 1?'sarvon77_admin':no == 2?"sarvon77_vignesh":"sarvon77_ragav",
 	  user:"sarvon77_admin",
 	  password : 'admin',
 	  database : 'sarvon77_hackathon'
-	});	 
+	}
+	var configNew = {
+	  host     : '148.66.136.189',
+	  user:"admincts",
+	  password : 'admincts',
+	  database : 'hackathon_cts'
+	}
+	_this.connection = mysql.createConnection(configNew);	 
 	_this.connection.connect(function(err){
 		if(!err) {
 			console.log("connected mysql");
