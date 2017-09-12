@@ -22,7 +22,7 @@ mysqlQuery.connect = function(cb,no) {
 	  password : 'GKXplEYmDrkUYCJNM1S',
 	  database : 'bbwemcxbx'
 	}
-	_this.connection = mysql.createConnection(configNew1);	 
+	_this.connection = mysql.createConnection(configHelioHost);	 
 	_this.connection.connect(function(err){
 		if(!err) {
 			console.log("connected mysql");
