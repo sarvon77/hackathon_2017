@@ -35,12 +35,12 @@ mysqlQuery.connect = function(cb,no) {
 			}
 		}
 	});
-	_this.connection.on('error', function(err) {
+	/*_this.connection.on('error', function(err) {
 		console.log('db error', err);
 		_this.connection.connect(function(){
 			console.log("db reconnected");
 		});
-	  });
+	  });*/
 	
 }
 
