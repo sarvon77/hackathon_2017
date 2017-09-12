@@ -16,7 +16,13 @@ mysqlQuery.connect = function(cb,no) {
 	  password : 'admincts',
 	  database : 'hackathon_cts'
 	}
-	_this.connection = mysql.createConnection(configNew);	 
+	var configNew1 = {
+	  host     : 'bbwemcxbx-mysql.services.clever-cloud.com',
+	  user:"uumefxzkitrmfxfb",
+	  password : 'GKXplEYmDrkUYCJNM1S',
+	  database : 'bbwemcxbx'
+	}
+	_this.connection = mysql.createConnection(configNew1);	 
 	_this.connection.connect(function(err){
 		if(!err) {
 			console.log("connected mysql");
