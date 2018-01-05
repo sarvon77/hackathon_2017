@@ -28,7 +28,7 @@ io.on('connection', function (socket) {
 	   io.to(ambulanceId[amId[0]]).emit("emergency", data);
   });
   socket.on('serviceAccept', function (data) {
-	  console.log("serviceAccept",data.data.contact);
+	  console.log("serviceAccept",data.data);
 	  //for(var f = 0;f < data.data.contact;f ++){
 	  // io.to(clientSocketId[data.data.contact[f]]).emit("emergencyServiceAccept", data);
 	  //}
