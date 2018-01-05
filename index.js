@@ -32,7 +32,7 @@ io.on('connection', function (socket) {
 	  console.log(contactDetails,contactDetails.length);
 	  for(var f = 0;f < contactDetails.length;f++){
 		  console.log(contactDetails[f],clientSocketId[contactDetails[f]])
-	   io.to(clientSocketId[contactDetails[f]]).emit("emergencyServiceAccept", data);
+	   io.to(clientSocketId[contactDetails[f]] || ambulanceId[contactDetails[f]]).emit("emergencyServiceAccept", data);
 	  }
   });
 	
