@@ -25,7 +25,7 @@ io.on('connection', function (socket) {
   socket.on('emergencyRequest', function (data) {
 	   var amId = Object.keys(ambulanceId);
 	   console.log(data,amId,ambulanceId);
-	   io.to(amId[0]).emit("emergency", {"client":data.mobileno,"location":data.location});
+	   io.to(ambulanceId[amId[0]]).emit("emergency", {"client":data.mobileno,"location":data.location});
   });
 });
 console.log("SDasdSA");
