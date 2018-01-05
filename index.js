@@ -29,7 +29,9 @@ io.on('connection', function (socket) {
   });
   socket.on('serviceAccept', function (data) {
 	  var contactDetails = data.data.contact;
+	  console.log(contactDetails,contactDetails.length);
 	  for(var f = 0;f < contactDetails.length;f++){
+		  console.log(contactDetails[f],clientSocketId[contactDetails[f]])
 	   io.to(clientSocketId[contactDetails[f]]).emit("emergencyServiceAccept", data);
 	  }
   });
