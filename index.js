@@ -29,7 +29,7 @@ io.on('connection', function (socket) {
   });
   socket.on('serviceAccept', function (data) {
 	  var contactDetails = data.data.contact;
-	  for(var f = 0;f < contactDetails.length;f ++){
+	  for(var f = 0;f < contactDetails.length;f++){
 	   io.to(clientSocketId[contactDetails[f]]).emit("emergencyServiceAccept", data);
 	  }
   });
