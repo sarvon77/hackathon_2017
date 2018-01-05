@@ -1,4 +1,3 @@
-var router = require('./component/route/route');
 
 
 const Hapi = require('hapi');
@@ -7,13 +6,30 @@ const Vision = require('vision');
 const Joi = require('joi');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('./package');
-var mysql = require("./component/config/mysql");
-mysql.connect(function(){
-    console.log("connected DB")
+
+var app = require('express')();
+var serverSocket = require('http').createServer(app);
+var io = require('socket.io')(serverSocket);
+serverSocket.listen(process.env.PORT);
+var clientSocketId = {};
+var ambulanceId = {};
+io.on('connection', function (socket) {  
+  socket.emit('deviceId', {});
+  socket.on('registerId', function (data) {
+	  if(!data.isAmbulance){
+		clientSocketId[data.deviceId] = data.id;
+	  } else {
+		ambulanceId[data.deviceId] = data.id;
+	  }
+  });
+  socket.on('emergencyRequest', function (data) {
+	   var amId = Object.keys(ambulanceId);
+	   console.log(data,amId);
+	   io.to(amId[0]).emit("emergency", {"client":data.mobileno,"location":data.location});
+  });
 });
-/*mysql.query("select * from mproduct_order",function(err,succ) {
-	console.log(err || succ);
-});*/
+console.log("SDasdSA");
+/*
 const server = new Hapi.Server();
 server.connection({
         //host: "localhost",
@@ -48,4 +64,5 @@ server.register([
 router.map(function(routerData) {
 	server.route(routerData);
 })
+*/
 
