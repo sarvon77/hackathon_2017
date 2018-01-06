@@ -35,7 +35,15 @@ io.on('connection', function (socket) {
 	   io.to(clientSocketId[contactDetails[f]] || ambulanceId[contactDetails[f]]).emit("emergencyServiceAccept", data);
 	  }
   });
-socket.on('emergencyRequestCancel', function (data) {
+socket.on('reachedEmit', function (data) {
+	  var contactDetails = data.contact;
+	  console.log(contactDetails,contactDetails.length);
+	  for(var f = 0;f < contactDetails.length;f++){
+		  console.log(contactDetails[f],clientSocketId[contactDetails[f]])
+	   io.to(clientSocketId[contactDetails[f]] || ambulanceId[contactDetails[f]]).emit("reachedDetails", data);
+	  }
+  });	
+   socket.on('emergencyRequestCancel', function (data) {
 	   var amId = Object.keys(ambulanceId);
 	   console.log(data,amId,ambulanceId);
 	   io.to(ambulanceId[amId[0]]).emit("requestCancel", data);
