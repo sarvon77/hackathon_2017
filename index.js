@@ -36,7 +36,7 @@ io.on('connection', function (socket) {
 	  }
   });
 socket.on('reachedEmit', function (data) {
-	  var contactDetails = data.contact;
+	  var contactDetails = data.data.contact;
 	  console.log(contactDetails,contactDetails.length);
 	  for(var f = 0;f < contactDetails.length;f++){
 		  console.log(contactDetails[f],clientSocketId[contactDetails[f]])
